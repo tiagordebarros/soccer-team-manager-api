@@ -30,7 +30,7 @@ app.post('/teams', (req, res) => {
 app.put('/teams/:id', (req, res) => {
     const { id } = req.params;
     const { name, initials } = req.body;
-    
+
     let updatedTeam;
   
     for (let i = 0; i < teams.length; i += 1) {
@@ -45,5 +45,13 @@ app.put('/teams/:id', (req, res) => {
   
     res.status(200).json({ updatedTeam });
   });
+
+app.get('/teams/:id', (req, res) => {
+    const { id } = req.params;
+
+    const filterId = teams.filter((team) => team.id === Number(id));
+
+    return res.status(200).json(filterId);
+});
 
 module.exports = app;
