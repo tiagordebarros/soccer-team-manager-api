@@ -1,24 +1,26 @@
 const express = require('express');
+const cors = require('cors');
 require('express-async-errors');
 const morgan = require('morgan');
 const apiCredentials = require('./middlewares/apiCredentials');
 const validateTeam = require('./middlewares/validateTeam');
 
 const teams = [
-    {
-      id: 1,
-      name: 'São Paulo Futebol Clube',
-      initials: 'SPF',
-    },
-    {
-      id: 2,
-      name: 'Clube Atlético Mineiro',
-      initials: 'CAM',
-    },
-  ];
+  {
+    id: 1,
+    name: 'São Paulo Futebol Clube',
+    initials: 'SPF',
+  },
+  {
+    id: 2,
+    name: 'Clube Atlético Mineiro',
+    initials: 'CAM',
+  },
+];
 
 const app = express();
 
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.static('./images'));
 app.use(express.json());
