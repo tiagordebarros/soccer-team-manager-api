@@ -78,6 +78,8 @@ app.delete('/teams/:id', existingId, (req, res) => {
     return res.status(200).json(deleteId);
 });
 
+app.use((_req, res) => res.sendStatus(404));
+
 module.exports = {
   app,
   teams,
