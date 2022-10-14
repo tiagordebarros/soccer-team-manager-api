@@ -33,7 +33,7 @@ app.post('/teams', (req, res) => {
     res.status(201).json({ teams: newTeam });
 });
 
-app.put('/teams/:id', (req, res) => {
+app.put('/teams/:id', existingId, (req, res) => {
     const { id } = req.params;
     const { name, initials } = req.body;
 
@@ -60,7 +60,7 @@ app.get('/teams/:id', existingId, (req, res) => {
     return res.status(200).json(filterId);
 });
 
-app.delete('/teams/:id', (req, res) => {
+app.delete('/teams/:id', existingId, (req, res) => {
     const { id } = req.params;
 
     const deleteId = teams.filter((team) => team.id !== Number(id));
