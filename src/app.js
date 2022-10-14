@@ -17,6 +17,12 @@ const app = express();
 
 app.use(express.json());
 
+const existingId = (req, res, next) => {
+  const { id } = req.params;
+  if (teams.some((team) => team.id === Number(id))) return next();
+  return res.sendStatus(404);
+};
+
 app.get('/', (_req, res) => res.status(200).json({ message: 'Olá, mundo!' }));
 
 app.get('/teams', (_req, res) => res.status(200).json({ teams }));
@@ -46,7 +52,7 @@ app.put('/teams/:id', (req, res) => {
     res.status(200).json({ updatedTeam });
   });
 
-app.get('/teams/:id', (req, res) => {
+app.get('/teams/:id', existingId, (req, res) => {
     const { id } = req.params;
 
     const filterId = teams.filter((team) => team.id === Number(id));
@@ -62,4 +68,7 @@ app.delete('/teams/:id', (req, res) => {
     return res.status(200).json(deleteId);
 });
 
-module.exports = app;
+module.exports = {
+  app,
+  teams,
+};
