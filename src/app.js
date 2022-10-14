@@ -1,5 +1,6 @@
 const express = require('express');
 require('express-async-errors');
+const morgan = require('morgan');
 const apiCredentials = require('./middlewares/apiCredentials');
 const validateTeam = require('./middlewares/validateTeam');
 
@@ -18,6 +19,7 @@ const teams = [
 
 const app = express();
 
+app.use(morgan('dev'));
 app.use(express.static('./images'));
 app.use(express.json());
 app.use(apiCredentials);
