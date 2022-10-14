@@ -1,4 +1,5 @@
 const express = require('express');
+require('express-async-errors');
 const apiCredentials = require('./middlewares/apiCredentials');
 const validateTeam = require('./middlewares/validateTeam');
 
