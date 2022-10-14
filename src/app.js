@@ -32,9 +32,15 @@ app.get('/', (_req, res) => res.status(200).json({ message: 'Olá, mundo!' }));
 app.get('/teams', (_req, res) => res.status(200).json({ teams }));
 
 app.post('/teams', validateTeam, (req, res) => {
+  if (
+    !req.teams.teams.includes(req.body.initials)
+    && teams.every((team) => team.initials !== req.body.initials)
+  ) {
+    return res.sendStatus(401);
+  }
     const newTeam = { ...req.body };
     teams.push(newTeam);
-    res.status(201).json({ teams: newTeam });
+    return res.status(201).json({ teams: newTeam });
 });
 
 app.put('/teams/:id', existingId, validateTeam, (req, res) => {
