@@ -1,4 +1,5 @@
 const express = require('express');
+const validateTeam = require('./middlewares/validateTeam');
 
 const teams = [
     {
@@ -27,13 +28,13 @@ app.get('/', (_req, res) => res.status(200).json({ message: 'Olá, mundo!' }));
 
 app.get('/teams', (_req, res) => res.status(200).json({ teams }));
 
-app.post('/teams', (req, res) => {
+app.post('/teams', validateTeam, (req, res) => {
     const newTeam = { ...req.body };
     teams.push(newTeam);
     res.status(201).json({ teams: newTeam });
 });
 
-app.put('/teams/:id', existingId, (req, res) => {
+app.put('/teams/:id', existingId, validateTeam, (req, res) => {
     const { id } = req.params;
     const { name, initials } = req.body;
 
