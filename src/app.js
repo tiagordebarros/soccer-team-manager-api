@@ -18,6 +18,7 @@ const teams = [
 
 const app = express();
 
+app.use(express.static('./images'));
 app.use(express.json());
 app.use(apiCredentials);
 
