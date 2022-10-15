@@ -58,4 +58,8 @@ router.delete('/:id', existingId, (req, res) => {
   return res.status(200).json(deleteId);
 });
 
+router.use((err, _req, res, _next) => {
+  res.status(500).json({ message: `Credenciais inválidas! Erro: ${err.message}` });
+});
+
 module.exports = router;
