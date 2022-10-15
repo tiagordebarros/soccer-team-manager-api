@@ -2,29 +2,12 @@ const express = require('express');
 
 const validateTeam = require('../middlewares/validateTeam');
 const apiCredentials = require('../middlewares/apiCredentials');
+const existingId = require('../middlewares/existingId');
+const teams = require('../mocks/soccerTeams');
 
 const router = express.Router();
 
 router.use(apiCredentials);
-
-const teams = [
-  {
-    id: 1,
-    name: 'São Paulo Futebol Clube',
-    initials: 'SPF',
-  },
-  {
-    id: 2,
-    name: 'Clube Atlético Mineiro',
-    initials: 'CAM',
-  },
-];
-
-const existingId = (req, res, next) => {
-  const { id } = req.params;
-  if (teams.some((team) => team.id === Number(id))) return next();
-  return res.sendStatus(404);
-};
 
 router.get('/', (_req, res) => res.status(200).json({ teams }));
 
