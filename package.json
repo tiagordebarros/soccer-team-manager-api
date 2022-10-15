@@ -13,7 +13,10 @@
   "author": "Tiago Ribeiro de Barros",
   "license": "ISC",
   "dependencies": {
-    "express": "4.17"
+    "cors": "2.8",
+    "express": "4.17",
+    "express-async-errors": "3.1",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "eslint": "6.8",
